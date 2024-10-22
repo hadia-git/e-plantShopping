@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+
 
 export const CartSlice = createSlice({
   name: 'cart',
@@ -24,6 +26,14 @@ const itemToUpdate = state.items.find(item => item.name === name);
 if (itemToUpdate) {
   itemToUpdate.quantity = quantity;
 }
+
+const handleAddToCart = (product) => {
+  dispatch(addItem(product));
+  setAddedToCart((prevState) => ({
+     ...prevState,
+     [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
+   }));
+};
     
     },
   },
